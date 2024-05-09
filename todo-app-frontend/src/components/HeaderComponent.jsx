@@ -21,7 +21,9 @@ const HeaderComponent = () => {
             </ul>
             <ul className="navbar-nav navbar-collapse  justify-content-end">
               <li class="nav-item">
-                <a class="nav-link">Logout</a>
+                <a href="#" class="nav-link">
+                  Logout
+                </a>
               </li>
             </ul>
           </div>
