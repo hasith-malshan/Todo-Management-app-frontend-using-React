@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const WelcomeComponent = () => {
   return (
@@ -7,10 +8,10 @@ const WelcomeComponent = () => {
         <h1 className="text-center mt-5">Welcome to Todo App</h1>
         <div className="d-flex justify-content-center mt-3">
           <span>
-            Do you have an account.?? <a href="">Login here</a>
+            Do you have an account.?? <Link to={'/login'}>Click here</Link>
           </span>
           <span className="ms-5">
-            New to Todo-App.?? <a href="">Create Account</a>
+            New to Todo-App.?? <Link to={'/login'}>Create Account</Link>
           </span>
         </div>
       </div>

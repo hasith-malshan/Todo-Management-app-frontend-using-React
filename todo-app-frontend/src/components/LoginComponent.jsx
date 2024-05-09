@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import authenticate from '../service/AuthenticationService';
+import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
   const {
@@ -9,6 +10,8 @@ const LoginComponent = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="container d-flex justify-content-center mt-5">
@@ -16,7 +19,11 @@ const LoginComponent = () => {
           <form
             onSubmit={handleSubmit((data) => {
               console.log(data);
-              console.log(authenticate(data.username, data.password));
+              if (authenticate(data.username, data.password)) {
+                navigate('/todo');
+              } else {
+                navigate('/');
+              }
             })}
           >
             <p>{errors.username?.message}</p>
