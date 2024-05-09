@@ -1,5 +1,5 @@
 function authenticate(username, password) {
-  return username === 'Hasith' && password === 1234;
+  return username === 'hasith' && password === '11223344';
 }
 
 export default authenticate;
