@@ -1,29 +1,45 @@
+import { Link } from 'react-router-dom';
+import { useAuth } from '../service/AuthenticationService';
+
 const HeaderComponent = () => {
+  const authContext = useAuth();
+
+  function logout() {
+    authContext.logout();
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             Todo-App
-          </a>
+          </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/home">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/home"
+                >
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/todo">
+                <Link className="nav-link" to="/todo">
                   Todos
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="navbar-nav navbar-collapse  justify-content-end">
               <li className="nav-item">
-                <a href="/logout" className="nav-link">
+                <Link
+                  to="/logout"
+                  className="nav-link"
+                  onClick={() => logout()}
+                >
                   Logout
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import authenticate from '../service/AuthenticationService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../service/AuthenticationService';
 
 const LoginComponent = () => {
   const {
@@ -10,6 +10,7 @@ const LoginComponent = () => {
     formState: { errors },
   } = useForm();
 
+  const authContext = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -19,7 +20,7 @@ const LoginComponent = () => {
           <form
             onSubmit={handleSubmit((data) => {
               console.log(data);
-              if (authenticate(data.username, data.password)) {
+              if (authContext.login(data.username, data.password)) {
                 navigate('/todo');
               } else {
                 navigate('/');
