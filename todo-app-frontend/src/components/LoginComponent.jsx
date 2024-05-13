@@ -13,18 +13,22 @@ const LoginComponent = () => {
   const authContext = useAuth();
   const navigate = useNavigate();
 
+  async function loginFunction(authContext, data, navigate) {
+    if (await authContext.login(data.username, data.password)) {
+      navigate('/todo');
+    } else {
+      navigate('/');
+    }
+  }
+
   return (
     <>
       <div className="container d-flex justify-content-center mt-5">
         <div className="row d-flex flex-column ">
           <form
             onSubmit={handleSubmit((data) => {
-              console.log(data);
-              if (authContext.login(data.username, data.password)) {
-                navigate('/todo');
-              } else {
-                navigate('/');
-              }
+              // console.log(data);
+              loginFunction(authContext, data, navigate);
             })}
           >
             <p>{errors.username?.message}</p>
