@@ -16,7 +16,7 @@ const WelcomeComponent = () => {
             Do you have an account.?? <Link to={'/login'}>Click here</Link>
           </span>
           <span className="ms-5">
-            New to Todo-App.?? <Link to={'/login'}>Create Account</Link>
+            New to Todo-App.?? <Link to={'/register'}>Create Account</Link>
           </span>
         </div>
       </div>

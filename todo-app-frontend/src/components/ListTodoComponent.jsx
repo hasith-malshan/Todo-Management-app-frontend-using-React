@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { deleteSingleTodo, retriveAllTodos } from '../service/TodoService';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useAuth } from '../service/AuthenticationService';
 
 const ListTodoComponent = () => {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
+  const authContext = useAuth();
 
   useEffect(() => refreshTodos(), []);
 
   function refreshTodos() {
-    retriveAllTodos('hasith').then((resp) => setTodos(resp.data));
+    retriveAllTodos(authContext.usernamefromLogin).then((resp) =>
+      setTodos(resp.data)
+    );
   }
 
   function deleteTodo(id) {
-    deleteSingleTodo('hasith', id).then(() => refreshTodos());
+    deleteSingleTodo(authContext.usernamefromLogin, id).then(() =>
+      refreshTodos()
+    );
   }
 
   return (
@@ -31,18 +37,16 @@ const ListTodoComponent = () => {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">id</th>
-              <th scope="col">description</th>
-              <th scope="col">username</th>
-              <th scope="col">targetDate</th>
-              <th scope="col">isDone</th>
-              <th scope="col">actions</th>
+              <th scope="col">Description</th>
+              <th scope="col">Username</th>
+              <th scope="col">TargetDate</th>
+              <th scope="col">IsDone</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             {todos.map((todo) => (
               <tr key={todo.id}>
-                <th scope="row">{todo.id}</th>
                 <td>{todo.description}</td>
                 <td>{todo.username}</td>
                 <td>{todo.targetDate}</td>

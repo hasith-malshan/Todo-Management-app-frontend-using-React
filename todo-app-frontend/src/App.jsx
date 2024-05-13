@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // import TestComponent from './components/TestComponent';
 import TodoComponent from './components/TodoComponent';
 import AuthProvider, { useAuth } from './service/AuthenticationService';
+import RegisterComponent from './components/RegisterComponent';
 
 function AuthenticatedRoutes({ children }) {
   const authContext = useAuth();
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<WelcomeComponent />}></Route>
             <Route path="/login" element={<LoginComponent />}></Route>
+            <Route path="/register" element={<RegisterComponent />}></Route>
 
             <Route
               path="/todo"

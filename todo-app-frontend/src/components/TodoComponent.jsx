@@ -6,9 +6,11 @@ import {
   retriveSingleTodo,
   updateTodo,
 } from '../service/TodoService';
+import { useAuth } from '../service/AuthenticationService';
 
 const TodoComponent = () => {
   const { id } = useParams();
+  const authContext = useAuth();
 
   const [descriptionToLoad, setDescriptionToLoad] = useState('');
   const [targetDateToLoad, setTargetDateToLoad] = useState('');
@@ -33,25 +35,25 @@ const TodoComponent = () => {
       const todo = {
         id: id,
         description: data.description,
-        username: 'hasith',
+        username: authContext.usernamefromLogin,
         targetDate: data.targetDate,
         isDone: false,
       };
       console.log(todo);
-      updateTodo('hasith', id, todo);
+      updateTodo(authContext.usernamefromLogin, id, todo);
     } else {
       const todoDao = {
         description: data.description,
-        username: 'hasith',
+        username: authContext.usernamefromLogin,
         targetDate: data.targetDate,
       };
-      addNewTodo('hasith', todoDao);
+      addNewTodo(authContext.usernamefromLogin, todoDao);
     }
   }
 
   function retriveTodo() {
     if (id != -1) {
-      retriveSingleTodo('hasith', id).then((resp) => {
+      retriveSingleTodo(authContext.usernamefromLogin, id).then((resp) => {
         setDescriptionToLoad(resp.data.description);
         setTargetDateToLoad(resp.data.targetDate);
         reset({

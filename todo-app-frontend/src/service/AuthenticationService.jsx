@@ -23,6 +23,23 @@ export default function AuthProvider({ children }) {
   //   }
   // }
 
+  async function register(username, password) {
+    let userDto = {
+      username: username,
+      password: password,
+    };
+
+    try {
+      const registerResponse = apiClient.post('/registration', userDto);
+      if ((await registerResponse).status == 201) {
+        console.log('201');
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {}
+  }
+
   async function login(username, password) {
     const baToken = 'Basic ' + window.btoa(username + ':' + password);
 
@@ -61,7 +78,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, usernamefromLogin, login, logout }}
+      value={{ isAuthenticated, usernamefromLogin, login, logout, register }}
     >
       {children}
     </AuthContext.Provider>
